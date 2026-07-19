@@ -35,6 +35,9 @@ importers:
       express:
         specifier: ^5.1.0
         version: 5.2.1
+      normalize.css:
+        specifier: ^8.0.1
+        version: 8.0.1
       rxjs:
         specifier: ~7.8.0
         version: 7.8.2
@@ -2395,6 +2398,9 @@ packages:
     resolution: {integrity: sha512-Zhq3a+yFKrYwSBluL4H9XP3m3y5uvQkB/09CwDruCiRmR/UJYnn9W4R48ry0uGC70aeTPKLynBtscP9efFFcPw==}
     engines: {node: ^20.17.0 || >=22.9.0}
     hasBin: true
+
+  normalize.css@8.0.1:
+    resolution: {integrity: sha512-qizSNPO93t1YUuUhP22btGOo3chcvDFqFaj2TRybP0DMxkHOCTYwp3n34fel4a31ORXy4m1Xq0Gyqpb5m33qIg==}
 
   npm-bundled@5.0.0:
     resolution: {integrity: sha512-JLSpbzh6UUXIEoqPsYBvVNVmyrjVZ1fzEFbqxKkTJQkWBO3xFzFT+KDnSKQWwOQNbuWRwt5LSD6HOTLGIWzfrw==}
@@ -5146,6 +5152,8 @@ snapshots:
   nopt@9.0.0:
     dependencies:
       abbrev: 4.0.0
+
+  normalize.css@8.0.1: {}
 
   npm-bundled@5.0.0:
     dependencies:
