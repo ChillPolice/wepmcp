@@ -1,0 +1,25 @@
+:host{
+  --panel-bg: #ccc;
+
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background: var(--panel-bg);
+  color: #111827;
+}
+
+.toggle {
+  position: relative;
+  z-index: 1001;
+  border: 0;
+  font-size: 32px;
+  display: flex;
+  justify-content: center;
+  height: 48px;
+  padding-inline: 8px;
+  background: inherit;
+  cursor: pointer;
+  background: var(--panel-bg);
+}
