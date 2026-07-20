@@ -9,5 +9,16 @@
     ☰
   </button>
 
+  <div class="spacer"></div>
+
+  <button
+    class="theme-toggle"
+    type="button"
+    [attr.aria-label]="themeService.theme() === 'dark' ? 'Switch to light theme' : 'Switch to dark theme'"
+    (click)="themeService.toggleTheme()"
+  >
+    {{ themeService.theme() === 'dark' ? '☀️' : '🌙' }}
+  </button>
+
   <app-sidebar></app-sidebar>
 </div>
