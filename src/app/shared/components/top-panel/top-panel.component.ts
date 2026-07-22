@@ -1,14 +1,12 @@
-import { Component, inject } from '@angular/core';
+import { Component } from '@angular/core';
 import { SidebarComponent } from '../sidebar/sidebar.component';
-import { ThemeService } from '../../services/theme.service';
+import { ThemeDropdownComponent } from '../theme-dropdown/theme-dropdown.component';
 
 @Component({
   selector: 'app-top-panel',
   standalone: true,
-  imports: [SidebarComponent],
+  imports: [SidebarComponent, ThemeDropdownComponent],
   templateUrl: './top-panel.component.html',
   styleUrl: './top-panel.component.scss',
 })
-export class TopPanelComponent {
-  protected readonly themeService = inject(ThemeService);
-}
+export class TopPanelComponent {}

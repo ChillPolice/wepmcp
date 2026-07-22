@@ -1,34 +1,64 @@
-import { Injectable, signal, effect, PLATFORM_ID, inject } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
+import { computed, effect, Injectable, inject, PLATFORM_ID, signal } from '@angular/core';
 
-export type Theme = 'light' | 'dark';
+export const THEMES = ['light', 'dark'] as const;
+
+export type Theme = (typeof THEMES)[number];
+export type UserTheme = Theme | 'system';
+
+const DEFAULT_THEME: Theme = 'light';
+
+function isTheme(value: string | null): value is Theme {
+  return THEMES.includes(value as Theme);
+}
 
 @Injectable({ providedIn: 'root' })
 export class ThemeService {
   private readonly platformId = inject(PLATFORM_ID);
   private readonly isBrowser = isPlatformBrowser(this.platformId);
 
-  readonly theme = signal<Theme>(this.resolveInitialTheme());
+  private readonly systemTheme = signal<Theme>(this.getSystemTheme());
+  readonly userTheme = signal<UserTheme>(this.resolveInitialUserTheme());
+
+  readonly theme = computed<Theme>(() => {
+    const user = this.userTheme();
+    return user === 'system' ? this.systemTheme() : user;
+  });
 
   constructor() {
-    effect(() => {
-      if (!this.isBrowser) return;
-      const value = this.theme();
-      document.documentElement.setAttribute('data-theme', value);
-      localStorage.setItem('theme', value);
-    });
+    if (this.isBrowser) {
+      window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+        this.systemTheme.set(e.matches ? 'dark' : 'light');
+      });
+
+      effect(() => {
+        const user = this.userTheme();
+        if (user === 'system') {
+          document.documentElement.removeAttribute('data-theme');
+          localStorage.removeItem('theme');
+        } else {
+          document.documentElement.setAttribute('data-theme', user);
+          localStorage.setItem('theme', user);
+        }
+      });
+    }
   }
 
   toggleTheme(): void {
-    this.theme.update(current => (current === 'light' ? 'dark' : 'light'));
+    const current = this.theme();
+    const idx = THEMES.indexOf(current);
+    const next = THEMES[(idx + 1) % THEMES.length];
+    this.userTheme.set(next);
   }
 
-  private resolveInitialTheme(): Theme {
-    if (!this.isBrowser) return 'light';
+  private resolveInitialUserTheme(): UserTheme {
+    if (!this.isBrowser) return 'system';
+    const stored = localStorage.getItem('theme');
+    return isTheme(stored) ? stored : 'system';
+  }
 
-    const stored = localStorage.getItem('theme') as Theme | null;
-    if (stored === 'light' || stored === 'dark') return stored;
-
+  private getSystemTheme(): Theme {
+    if (!this.isBrowser) return DEFAULT_THEME;
     return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
   }
 }

@@ -1,27 +1,58 @@
+@use 'sass:map';
 @import 'normalize.css';
 
-:root, [data-theme="light"] {
-  --color-bg: #ffffff;
-  --color-surface: #f8fafc;
-  --color-text: #111827;
-  --color-text-secondary: #6b7280;
-  --color-panel-bg: #e5e7eb;
-  --color-border: #d1d5db;
-  --color-shadow: rgba(15, 23, 42, 0.1);
-  --color-overlay: rgba(15, 23, 42, 0.35);
+// ── Theme palettes (single source of truth) ─────────────────────────
+$themes: (
+  light: (
+    color-bg: #ffffff,
+    color-surface: #f8fafc,
+    color-text: #111827,
+    color-text-secondary: #6b7280,
+    color-panel-bg: #e5e7eb,
+    color-border: #d1d5db,
+    color-shadow: rgba(15, 23, 42, 0.1),
+    color-overlay: rgba(15, 23, 42, 0.35),
+  ),
+  dark: (
+    color-bg: #0f172a,
+    color-surface: #1e293b,
+    color-text: #f1f5f9,
+    color-text-secondary: #94a3b8,
+    color-panel-bg: #1e293b,
+    color-border: #334155,
+    color-shadow: rgba(0, 0, 0, 0.3),
+    color-overlay: rgba(0, 0, 0, 0.5),
+  ),
+);
+
+@mixin apply-theme($name) {
+  $palette: map.get($themes, $name);
+  @each $key, $value in $palette {
+    --#{$key}: #{$value};
+  }
+  color-scheme: #{$name};
 }
 
-[data-theme="dark"] {
-  --color-bg: #0f172a;
-  --color-surface: #1e293b;
-  --color-text: #f1f5f9;
-  --color-text-secondary: #94a3b8;
-  --color-panel-bg: #1e293b;
-  --color-border: #334155;
-  --color-shadow: rgba(0, 0, 0, 0.3);
-  --color-overlay: rgba(0, 0, 0, 0.5);
+// ── Default (light) ─────────────────────────────────────────────────
+:root {
+  @include apply-theme(light);
 }
 
+// ── System preference: auto-switch when no explicit choice ──────────
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    @include apply-theme(dark);
+  }
+}
+
+// ── Explicit user overrides ─────────────────────────────────────────
+@each $name in map.keys($themes) {
+  [data-theme='#{$name}'] {
+    @include apply-theme($name);
+  }
+}
+
+// ── Global base styles ──────────────────────────────────────────────
 :host {
   display: block;
 }

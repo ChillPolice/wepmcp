@@ -33,22 +33,3 @@
 .spacer {
   flex: 1;
 }
-
-.theme-toggle {
-  border: 0;
-  font-size: 20px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 48px;
-  width: 48px;
-  padding: 0;
-  background: var(--color-panel-bg);
-  color: var(--color-text);
-  cursor: pointer;
-  transition: background-color 200ms ease, color 200ms ease;
-
-  &:hover {
-    background: var(--color-border);
-  }
-}

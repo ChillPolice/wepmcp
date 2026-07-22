@@ -1,0 +1,25 @@
+<button
+  class="theme-toggle"
+  type="button"
+  aria-label="Theme settings"
+  popovertarget="theme-popover"
+  popovertargetaction="toggle"
+>
+  {{ meta(themeService.userTheme()).icon }}
+</button>
+
+<div id="theme-popover" class="theme-dropdown" popover="auto">
+  @for (option of options; track option) {
+    <button
+      class="dropdown-item"
+      [class.active]="themeService.userTheme() === option"
+      type="button"
+      (click)="select(option)"
+      popovertarget="theme-popover"
+      popovertargetaction="hide"
+    >
+      <span class="icon">{{ meta(option).icon }}</span>
+      <span class="label">{{ meta(option).label }}</span>
+    </button>
+  }
+</div>

@@ -1,24 +1,12 @@
 <div class="top-panel">
-  <button
-    class="toggle"
-    type="button"
-    aria-label="Toggle sidebar"
-    popovertarget="sidebar-popover"
-    popovertargetaction="toggle"
-  >
+  <button class="toggle" type="button" aria-label="Toggle sidebar" popovertarget="sidebar-popover"
+    popovertargetaction="toggle">
     ☰
   </button>
 
   <div class="spacer"></div>
 
-  <button
-    class="theme-toggle"
-    type="button"
-    [attr.aria-label]="themeService.theme() === 'dark' ? 'Switch to light theme' : 'Switch to dark theme'"
-    (click)="themeService.toggleTheme()"
-  >
-    {{ themeService.theme() === 'dark' ? '☀️' : '🌙' }}
-  </button>
+  <app-theme-dropdown />
 
-  <app-sidebar></app-sidebar>
+  <app-sidebar />
 </div>
