@@ -18,14 +18,14 @@ export class ThemeService {
   private readonly isBrowser = isPlatformBrowser(this.platformId);
 
   private readonly systemTheme = signal<Theme>(this.getSystemTheme());
-  readonly userTheme = signal<UserTheme>(this.resolveInitialUserTheme());
+  public readonly userTheme = signal<UserTheme>(this.resolveInitialUserTheme());
 
-  readonly theme = computed<Theme>(() => {
+  public readonly theme = computed<Theme>(() => {
     const user = this.userTheme();
     return user === 'system' ? this.systemTheme() : user;
   });
 
-  constructor() {
+  public constructor() {
     if (this.isBrowser) {
       window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
         this.systemTheme.set(e.matches ? 'dark' : 'light');
@@ -44,7 +44,7 @@ export class ThemeService {
     }
   }
 
-  toggleTheme(): void {
+  public toggleTheme(): void {
     const current = this.theme();
     const idx = THEMES.indexOf(current);
     const next = THEMES[(idx + 1) % THEMES.length];
