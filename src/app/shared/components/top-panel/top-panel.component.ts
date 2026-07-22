@@ -4,7 +4,6 @@ import { ThemeDropdownComponent } from '../theme-dropdown/theme-dropdown.compone
 
 @Component({
   selector: 'app-top-panel',
-  standalone: true,
   imports: [SidebarComponent, ThemeDropdownComponent],
   templateUrl: './top-panel.component.html',
   styleUrl: './top-panel.component.scss',

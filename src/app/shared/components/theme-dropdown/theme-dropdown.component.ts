@@ -9,7 +9,6 @@ const THEME_META: Record<UserTheme, { label: string; icon: string }> = {
 
 @Component({
   selector: 'app-theme-dropdown',
-  standalone: true,
   templateUrl: './theme-dropdown.component.html',
   styleUrl: './theme-dropdown.component.scss',
 })

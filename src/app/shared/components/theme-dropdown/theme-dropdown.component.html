@@ -1,5 +1,5 @@
 <button
-  class="theme-toggle"
+  class="theme-dropdown__toggle"
   type="button"
   aria-label="Theme settings"
   popovertarget="theme-popover"
@@ -8,18 +8,18 @@
   {{ meta(themeService.userTheme()).icon }}
 </button>
 
-<div id="theme-popover" class="theme-dropdown" popover="auto">
+<div id="theme-popover" class="theme-dropdown__menu" popover="auto">
   @for (option of options; track option) {
     <button
-      class="dropdown-item"
-      [class.active]="themeService.userTheme() === option"
+      class="theme-dropdown__item"
+      [class.theme-dropdown__item--active]="themeService.userTheme() === option"
       type="button"
       (click)="select(option)"
       popovertarget="theme-popover"
       popovertargetaction="hide"
     >
-      <span class="icon">{{ meta(option).icon }}</span>
-      <span class="label">{{ meta(option).label }}</span>
+      <span class="theme-dropdown__icon">{{ meta(option).icon }}</span>
+      <span class="theme-dropdown__label">{{ meta(option).label }}</span>
     </button>
   }
 </div>
