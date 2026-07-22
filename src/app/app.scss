@@ -1,5 +1,5 @@
 :host {
   display: block;
-  padding-top: 48px;
-  padding-inline: 16px;
+  padding-top: var(--space-600);
+  padding-inline: var(--space-200);
 }

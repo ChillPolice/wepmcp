@@ -10,3 +10,4 @@
 ## Styling conventions
 - Use the BEM (Block Element Modifier) methodology for naming CSS classes (e.g., `block__element--modifier`).
 - Use pixels (`px`) instead of `rem` for margins, padding, and spacing.
+- Use spacing tokens (`--space-025` through `--space-1000` defined in `_spacing.scss`) for margins, paddings, and gaps instead of hardcoded pixel values.
