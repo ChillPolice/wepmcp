@@ -24,6 +24,16 @@ $themes: (
     color-shadow: rgba(0, 0, 0, 0.3),
     color-overlay: rgba(0, 0, 0, 0.5),
   ),
+  pride: (
+    color-bg: #fdf6ff,
+    color-surface: rgba(255, 255, 255, 0.82),
+    color-text: #2e1065,
+    color-text-secondary: #6b21a8,
+    color-panel-bg: rgba(255, 255, 255, 0.65),
+    color-border: rgba(168, 85, 247, 0.25),
+    color-shadow: rgba(147, 51, 234, 0.12),
+    color-overlay: rgba(88, 28, 135, 0.3),
+  ),
 );
 
 @mixin apply-theme($name) {
@@ -31,7 +41,11 @@ $themes: (
   @each $key, $value in $palette {
     --#{$key}: #{$value};
   }
-  color-scheme: #{$name};
+  @if $name == pride {
+    color-scheme: light;
+  } @else {
+    color-scheme: #{$name};
+  }
 }
 
 // ── Default (light) ─────────────────────────────────────────────────
@@ -68,4 +82,21 @@ body {
   background-color: var(--color-bg);
   color: var(--color-text);
   transition: background-color 200ms ease, color 200ms ease;
+}
+
+// ── Pride rainbow background ────────────────────────────────────────
+[data-theme='pride'] body {
+  background:
+    linear-gradient(
+      135deg,
+      rgba(228,  3, 33, 0.12) 0%,       /* red      */
+      rgba(255,140,  0, 0.12) 16.6%,     /* orange   */
+      rgba(255,237,  0, 0.10) 33.3%,     /* yellow   */
+      rgba(  0,128, 38, 0.10) 50%,       /* green    */
+      rgba( 36, 64,142, 0.12) 66.6%,     /* blue     */
+      rgba(115, 41,130, 0.12) 83.3%,     /* violet   */
+      rgba(214,  2,112, 0.10) 100%       /* pink     */
+    )
+    fixed;
+  background-color: var(--color-bg);
 }

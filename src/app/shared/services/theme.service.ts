@@ -1,7 +1,7 @@
 import { isPlatformBrowser } from '@angular/common';
 import { computed, effect, Injectable, inject, PLATFORM_ID, signal } from '@angular/core';
 
-export const THEMES = ['light', 'dark'] as const;
+export const THEMES = ['light', 'dark', 'pride'] as const;
 
 export type Theme = (typeof THEMES)[number];
 export type UserTheme = Theme | 'system';

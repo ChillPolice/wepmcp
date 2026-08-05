@@ -5,6 +5,7 @@ const THEME_META: Record<UserTheme, { label: string; icon: string }> = {
   system: { label: 'System', icon: '💻' },
   light: { label: 'Light', icon: '☀️' },
   dark: { label: 'Dark', icon: '🌙' },
+  pride: { label: 'Pride', icon: '🏳️‍🌈' },
 };
 
 @Component({
