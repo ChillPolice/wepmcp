@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-home-page',
+  selector: 'pls-home-page',
   standalone: true,
   imports: [],
   templateUrl: './home.component.html',

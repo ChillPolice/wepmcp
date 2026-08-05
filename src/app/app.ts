@@ -3,11 +3,11 @@ import { RouterOutlet } from '@angular/router';
 import { TopPanelComponent } from './shared';
 
 @Component({
-  selector: 'app-root',
+  selector: 'pls-root',
   imports: [RouterOutlet, TopPanelComponent],
   templateUrl: './app.html',
   styleUrl: './app.scss',
 })
 export class App {
-  protected readonly title = signal('webmcp');
+  protected readonly title = signal('pulsera');
 }
