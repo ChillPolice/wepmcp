@@ -12,6 +12,10 @@ ng serve
 
 Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
 
+## Architecture Highlights
+- **LLM Integration:** Built using an Adapter Pattern. The `LlmManagerService` communicates via the `LlmProvider` interface, allowing hot-swapping of AI models (e.g., Mock, Gemini, Groq).
+- **Styling:** Uses BEM methodology and CSS design tokens (`--space-*`).
+
 ## Code scaffolding
 
 Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
