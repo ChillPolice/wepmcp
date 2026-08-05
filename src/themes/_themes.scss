@@ -1,0 +1,27 @@
+@use 'sass:map';
+@forward 'light';
+@forward 'dark';
+@forward 'pride';
+@use 'light' as *;
+@use 'dark' as *;
+@use 'pride' as *;
+
+// ── Aggregated theme map ────────────────────────────────────────────
+$themes: (
+  light: $light-palette,
+  dark: $dark-palette,
+  pride: $pride-palette,
+);
+
+// ── Apply theme mixin ───────────────────────────────────────────────
+@mixin apply-theme($name) {
+  $palette: map.get($themes, $name);
+  @each $key, $value in $palette {
+    --#{$key}: #{$value};
+  }
+  @if $name == pride {
+    color-scheme: light;
+  } @else {
+    color-scheme: #{$name};
+  }
+}
