@@ -1,0 +1,46 @@
+<div class="chat-panel">
+  <div class="chat-panel__header">
+    <div class="chat-panel__title">AI Assistant</div>
+    <div class="chat-panel__provider-badge">
+      {{ activeProvider().name }}
+    </div>
+  </div>
+
+  <div class="chat-panel__messages" #messagesContainer>
+    <div *ngIf="chatHistory().length === 0" class="chat-panel__empty-state">
+      <p>How can I help you today?</p>
+    </div>
+
+    <div *ngFor="let msg of chatHistory()" 
+         class="chat-panel__message" 
+         [ngClass]="'chat-panel__message--' + msg.role">
+      <div class="chat-panel__message-bubble">
+        {{ msg.content }}
+      </div>
+    </div>
+    
+    <div *ngIf="isGenerating()" class="chat-panel__message chat-panel__message--assistant">
+      <div class="chat-panel__message-bubble chat-panel__message-bubble--typing">
+        <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+      </div>
+    </div>
+  </div>
+
+  <div class="chat-panel__input-area">
+    <div class="chat-panel__input-wrapper">
+      <textarea 
+        class="chat-panel__textarea"
+        [(ngModel)]="userInput"
+        (keydown)="handleKeyDown($event)"
+        placeholder="Type a message..."
+        rows="1">
+      </textarea>
+      <button 
+        class="chat-panel__send-btn" 
+        (click)="sendMessage()"
+        [disabled]="!userInput.trim() || isGenerating()">
+        ↑
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,4 +1,4 @@
-<aside id="sidebar-popover" class="sidebar" popover="auto">
+<aside [id]="popoverId()" class="sidebar" [class.sidebar--right]="side() === 'right'" popover="auto">
   <div class="sidebar__content">
     <ng-content></ng-content>
   </div>

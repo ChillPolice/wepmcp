@@ -1,0 +1,186 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  max-width: 800px;
+  background-color: var(--color-surface);
+  border-radius: var(--radius-large);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.chat-panel {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--space-075) var(--space-100);
+    background-color: var(--color-surface-variant);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  &__title {
+    font-weight: bold;
+    font-size: 1.125rem;
+    color: var(--color-text);
+  }
+
+  &__provider-badge {
+    font-size: 0.75rem;
+    padding: var(--space-025) var(--space-050);
+    background-color: var(--color-primary);
+    color: var(--color-on-primary);
+    border-radius: var(--radius-small);
+  }
+
+  &__messages {
+    flex: 1;
+    overflow-y: auto;
+    padding: var(--space-100);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-075);
+  }
+
+  &__empty-state {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-text-muted);
+    font-style: italic;
+  }
+
+  &__message {
+    display: flex;
+    width: 100%;
+
+    &--user {
+      justify-content: flex-end;
+      
+      .chat-panel__message-bubble {
+        background-color: var(--color-primary);
+        color: var(--color-on-primary);
+        border-bottom-right-radius: 4px;
+      }
+    }
+
+    &--assistant {
+      justify-content: flex-start;
+      
+      .chat-panel__message-bubble {
+        background-color: var(--color-surface-variant);
+        color: var(--color-text);
+        border-bottom-left-radius: 4px;
+      }
+    }
+  }
+
+  &__message-bubble {
+    max-width: 80%;
+    padding: var(--space-050) var(--space-075);
+    border-radius: var(--radius-medium);
+    line-height: 1.5;
+    word-wrap: break-word;
+
+    &--typing {
+      display: flex;
+      gap: 4px;
+      align-items: center;
+      min-height: 40px;
+
+      .dot {
+        width: 8px;
+        height: 8px;
+        background-color: currentColor;
+        border-radius: 50%;
+        animation: pulse 1.5s infinite ease-in-out;
+        opacity: 0.4;
+
+        &:nth-child(1) { animation-delay: 0s; }
+        &:nth-child(2) { animation-delay: 0.2s; }
+        &:nth-child(3) { animation-delay: 0.4s; }
+      }
+    }
+  }
+
+  &__input-area {
+    padding: var(--space-100);
+    background-color: var(--color-surface);
+    border-top: 1px solid var(--color-border);
+  }
+
+  &__input-wrapper {
+    display: flex;
+    align-items: flex-end;
+    gap: var(--space-050);
+    background-color: var(--color-background);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-medium);
+    padding: var(--space-025);
+    transition: border-color 0.2s;
+
+    &:focus-within {
+      border-color: var(--color-primary);
+    }
+  }
+
+  &__textarea {
+    flex: 1;
+    background: transparent;
+    border: none;
+    color: var(--color-text);
+    padding: var(--space-025) var(--space-050);
+    font-family: inherit;
+    font-size: 1rem;
+    line-height: 1.5;
+    resize: none;
+    outline: none;
+    
+    field-sizing: content;
+    height: auto;
+    min-block-size: 1.5lh;
+    max-block-size: 8lh;
+    width: auto;
+
+    &::placeholder {
+      color: var(--color-text-muted);
+    }
+  }
+
+  &__send-btn {
+    background-color: var(--color-primary);
+    color: var(--color-on-primary);
+    border: none;
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: opacity 0.2s;
+    flex-shrink: 0;
+    margin-bottom: var(--space-025);
+
+    &:hover:not(:disabled) {
+      opacity: 0.9;
+    }
+
+    &:disabled {
+      background-color: var(--color-border);
+      color: var(--color-text-muted);
+      cursor: not-allowed;
+    }
+  }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 0.4; transform: scale(0.8); }
+  50% { opacity: 1; transform: scale(1.1); }
+}
